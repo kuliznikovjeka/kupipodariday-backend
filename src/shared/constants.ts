@@ -1,4 +1,7 @@
 export const FALLBACK_VALUES = {
-  SERVER_PORT: 3000,
   DB_PORT: 5432,
+  SERVER_PORT: 3000,
 };
+
+export const httpCorsMethods = 'GET,POST,PUT,DELETE,PATCH,OPTIONS';
+export const httpLocalhost = 'http://localhost';
