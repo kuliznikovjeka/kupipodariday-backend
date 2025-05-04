@@ -1,0 +1,4 @@
+export const FALLBACK_VALUES = {
+  SERVER_PORT: 3000,
+  DB_PORT: 5432,
+};
