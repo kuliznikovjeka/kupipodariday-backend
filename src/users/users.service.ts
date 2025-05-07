@@ -51,18 +51,29 @@ export class UsersService {
   }
 
   async findById(id: number): Promise<User> {
-    return await this.findOne({ where: { id } });
+    const user = await this.usersRepository.findOne({ where: { id } });
+    if (!user) {
+      throw new NotFoundException();
+    }
+    return user;
   }
 
   async findByUsername(username: string): Promise<User> {
-    return await this.findOne({
+    const user = await this.usersRepository.findOne({
       where: { username: ILike(`%${username}%`) },
     });
+    if (!user) {
+      throw new NotFoundException();
+    }
+    return user;
   }
 
   async findMany(query: string): Promise<User[]> {
     return await this.usersRepository.find({
-      where: [{ email: query }, { username: ILike(`%${query}%`) }],
+      where: [
+        { email: ILike(`%${query}%`) },
+        { username: ILike(`%${query}%`) },
+      ],
     });
   }
 

@@ -45,16 +45,17 @@ export class UsersController {
     return await this.usersService.findMany(query);
   }
 
-  @Get(':username')
-  @UseInterceptors(SensitiveDataInterceptor)
-  async getByUsername(@Param('username') username: string): Promise<User> {
-    return await this.usersService.findByUsername(username);
-  }
-
   @Get('me')
   @UseInterceptors(SensitiveDataInterceptor)
   async getCurrentUser(@Req() req: RequestWithUser) {
     return await this.usersService.findById(req.user.id);
+  }
+
+  // eslint-disable-next-line perfectionist/sort-classes
+  @Get(':username')
+  @UseInterceptors(SensitiveDataInterceptor)
+  async getByUsername(@Param('username') username: string): Promise<User> {
+    return await this.usersService.findByUsername(username);
   }
 
   @Get('me/wishes')
